@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solar — Brand & Campaign Case Study</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --red:    #FF3131;
+    --coral:  #FF5757;
+    --orange: #FF914D;
+    --sand:   #EDBC8B;
+    --black:  #111;
+    --mid:    #555;
+    --light:  #aaa;
+    --bg:     #ffffff;
+  }
+
+  html { font-size: 16px; }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid #ebebeb;
+  }
+
+  .nav-inner {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 0 32px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--black);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .nav-links a:hover { color: var(--orange); }
+
+  .nav-links .li-icon {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--black);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.75;
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 116px 32px 120px;
+  }
+
+  /* HEADER */
+  header {
+    margin-bottom: 80px;
+    border-bottom: 1px solid #e8e8e8;
+    padding-bottom: 40px;
+  }
+
+  .brand-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.4rem, 6vw, 3.8rem);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--black);
+    margin-bottom: 20px;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    color: var(--mid);
+    font-weight: 300;
+    max-width: 520px;
+  }
+
+  /* SECTIONS */
+  section { margin-bottom: 72px; }
+
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.65rem;
+    font-weight: 400;
+    color: var(--black);
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+
+  h3 {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 12px;
+    margin-top: 36px;
+  }
+
+  h3:first-child { margin-top: 0; }
+
+  p {
+    font-size: 0.975rem;
+    color: #333;
+    margin-bottom: 16px;
+    font-weight: 300;
+  }
+
+  p:last-child { margin-bottom: 0; }
+
+  /* SWATCH LIST */
+  .swatches {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+
+  .swatch-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .swatch {
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  .swatch-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--mid);
+  }
+
+  .swatch-desc {
+    font-size: 0.875rem;
+    color: var(--mid);
+    font-weight: 300;
+  }
+
+  /* IMAGE PLACEHOLDER */
+  .placeholder-img {
+    width: 100%;
+    aspect-ratio: 1584 / 396;
+    background: #f2f2f2;
+    border: 1px dashed #d0d0d0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+    border-radius: 4px;
+    margin: 32px 0;
+  }
+
+  .placeholder-img span {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--light);
+  }
+
+  .placeholder-img .dims {
+    font-size: 10px;
+    color: #ccc;
+    letter-spacing: 0.08em;
+  }
+
+  /* VIDEO PLACEHOLDER */
+  .placeholder-video {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #f2f2f2;
+    border: 1px dashed #d0d0d0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 4px;
+    margin: 32px 0;
+  }
+
+  .placeholder-video .play-icon {
+    width: 44px;
+    height: 44px;
+    border: 1.5px solid #ccc;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .placeholder-video .play-icon svg { margin-left: 3px; }
+
+  .placeholder-video span {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--light);
+  }
+
+  /* SCENES */
+  .scenes {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 8px;
+  }
+
+  .scene {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid #f0f0f0;
+    align-items: start;
+  }
+
+  .scene:last-child { border-bottom: none; }
+
+  .scene-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--orange);
+    padding-top: 2px;
+    letter-spacing: 0.05em;
+  }
+
+  .scene-content strong {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--black);
+    margin-bottom: 6px;
+    letter-spacing: 0.01em;
+  }
+
+  .scene-content p {
+    font-size: 0.9rem;
+    color: var(--mid);
+    margin-bottom: 0;
+    line-height: 1.65;
+  }
+
+  /* VOICE PRINCIPLES */
+  .voice-list {
+    list-style: none;
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .voice-list li {
+    font-size: 0.95rem;
+    color: #333;
+    font-weight: 300;
+    padding-left: 18px;
+    position: relative;
+    line-height: 1.65;
+  }
+
+  .voice-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 11px;
+    width: 6px;
+    height: 1px;
+    background: var(--orange);
+  }
+
+  /* COPY EXAMPLES */
+  .copy-examples {
+    background: #fafafa;
+    border-left: 2px solid var(--orange);
+    padding: 20px 24px;
+    margin-top: 20px;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .copy-examples p {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.05rem;
+    font-style: italic;
+    color: #444;
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+
+  .copy-examples p:last-child { margin-bottom: 0; }
+
+  /* DIVIDER */
+  .divider {
+    border: none;
+    border-top: 1px solid #ebebeb;
+    margin: 0 0 72px;
+  }
+
+  /* FOOTER */
+  footer {
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid #ebebeb;
+  }
+
+  footer p {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: #bbb;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* CAMPAIGN LINE */
+  .campaign-line {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    color: var(--red);
+    margin: 20px 0;
+  }
+
+  /* AVOID/USE */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 20px;
+  }
+
+  .col-block {
+    padding: 18px 20px;
+    border-radius: 4px;
+  }
+
+  .col-block.avoid { background: #fff5f5; }
+  .col-block.use   { background: #fff8f2; }
+
+  .col-block h4 {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .col-block.avoid h4 { color: var(--coral); }
+  .col-block.use h4   { color: var(--orange); }
+
+  .col-block ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .col-block ul li {
+    font-size: 0.875rem;
+    color: var(--mid);
+    font-weight: 300;
+  }
+
+  @media (max-width: 520px) {
+    body { padding: 100px 20px 80px; }
+    .two-col { grid-template-columns: 1fr; }
+    h1 { font-size: 2rem; }
+    .nav-inner { padding: 0 20px; }
+  }
+
+  /* ABOUT OVERLAY */
+  .about-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: #fff;
+    overflow-y: auto;
+  }
+
+  .about-overlay.open { display: block; }
+
+  .about-inner {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 100px 32px 120px;
+  }
+
+  .about-close {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 201;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid #ebebeb;
+  }
+
+  .about-close-inner {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 0 32px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .about-close-inner span {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--black);
+  }
+
+  .about-back {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mid);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.15s;
+  }
+
+  .about-back:hover { color: var(--orange); }
+
+  .about-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.6rem, 7vw, 4.2rem);
+    font-weight: 400;
+    line-height: 1.05;
+    color: var(--black);
+    margin-bottom: 40px;
+  }
+
+  .about-name span {
+    display: block;
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--mid);
+    margin-top: 8px;
+    line-height: 1.55;
+  }
+
+  .about-body {
+    border-top: 1px solid #ebebeb;
+    padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 520px;
+  }
+
+  .about-body p {
+    font-size: 1rem;
+    color: #333;
+    font-weight: 300;
+    line-height: 1.8;
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 520px) {
+    .about-inner { padding: 96px 20px 80px; }
+    .about-close-inner { padding: 0 20px; }
+  }
+
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-name">Amandeep Kaur</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="https://www.linkedin.com/in/amandeep-kaur-64a937295/" target="_blank" rel="noopener">LinkedIn</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header>
+  <p class="brand-tag">Portfolio — Case Study</p>
+  <h1>Solar</h1>
+  <p class="subtitle">Brand identity and ad campaign concept for a hypothetical grassroots conservation organisation.</p>
+</header>
+
+<!-- PROJECT OVERVIEW -->
+<section>
+  <h2>Project Overview</h2>
+  <p>Solar is a hypothetical grassroots conservation brand built around community-driven environmental efforts. The project brief called for developing a full visual identity from the ground up, logo, colour system, typography, and brand voice, followed by a conceptual ad campaign designed for social media and digital platforms.</p>
+  <p>The goal was to create something human and warm rather than corporate and polished. Grassroots organisations often struggle to look credible without losing their authenticity. Solar needed to feel both: a brand that earns trust while genuinely reflecting the people behind it.</p>
+  <p>This case study walks through the full process: brand identity decisions, the thinking behind the campaign concept, and how the storyboard translates strategy into motion.</p>
+</section>
+
+<!-- IMAGE PLACEHOLDER -->
+<img src="BRAND IDENTITY SPEED PRACTICE (1).png" alt="Solar Brand Identity" style="width:100%;border-radius:4px;margin:32px 0;display:block;">
+
+<hr class="divider">
+
+<!-- BRAND IDENTITY -->
+<section>
+  <h2>Brand Identity</h2>
+
+  <h3>Logo</h3>
+  <p>The Solar logotype pairs a bold wordmark with a standalone symbol designed to work independently as an icon, patch, watermark, or social avatar. The symbol draws from solar and natural motifs, referencing both the brand name and the energy of collective action.</p>
+  <p>A key decision was making the symbol separable. Grassroots organisations need flexibility. The symbol can live on a volunteer's shirt while the full lockup anchors a banner or campaign header.</p>
+
+  <h3>Colour Palette</h3>
+  <p>The palette was built around heat, warmth, and urgency rather than the clinical greens often defaulted to in environmental branding.</p>
+
+  <div class="swatches">
+    <div class="swatch-row">
+      <div class="swatch" style="background:#FF3131;"></div>
+      <span class="swatch-label">#FF3131</span>
+      <span class="swatch-desc">Strong, activating red. Energy, urgency, action.</span>
+    </div>
+    <div class="swatch-row">
+      <div class="swatch" style="background:#FF5757;"></div>
+      <span class="swatch-label">#FF5757</span>
+      <span class="swatch-desc">Softened coral red. Approachable, human.</span>
+    </div>
+    <div class="swatch-row">
+      <div class="swatch" style="background:#FF914D;"></div>
+      <span class="swatch-label">#FF914D</span>
+      <span class="swatch-desc">Burnt orange. Earthy, grounded, outdoors.</span>
+    </div>
+    <div class="swatch-row">
+      <div class="swatch" style="background:#EDBC8B;"></div>
+      <span class="swatch-label">#EDBC8B</span>
+      <span class="swatch-desc">Warm sand. Light, breathable, natural.</span>
+    </div>
+  </div>
+
+  <p>These colours evoke sun-baked landscapes and physical effort. The deliberate avoidance of green challenges the visual clichés of environmental branding and makes Solar immediately distinct.</p>
+
+  <h3>Typography</h3>
+  <p><strong>Yearbook Solid</strong> handles headlines and display text. It carries a community, handmade, printed-matter quality: something people made together, not handed down from a boardroom.</p>
+  <p><strong>Cloud Soft</strong> handles body copy and supporting text. Yearbook Solid brings the energy, Cloud Soft makes it readable. Together they balance momentum with warmth.</p>
+
+  <h3>Moodboard</h3>
+  <p>The moodboard establishes the brand's visual world before the campaign executes in it. The direction: real people, volunteers, workers, community members, photographed and styled within the brand palette. Terracotta shirts, warm linens, sandy tones. Nothing overly curated. Images should feel like they were taken by someone who was there.</p>
+  <p>This palette-coded dress direction means that when the brand appears in real-world contexts, the people become the visual system.</p>
+</section>
+
+<hr class="divider">
+
+<!-- WHAT IS AN ANIMATIC -->
+<section>
+  <h2>What Is an Animatic?</h2>
+  <p>An animatic is a sequenced series of still frames edited together with timing and sometimes audio to simulate how a video ad will look and feel before full production.</p>
+  <p>Think of it as a moving storyboard. Where a storyboard shows individual frames on a page, an animatic strings those frames into a rough video cut so that transitions, pacing, and overall rhythm can be evaluated.</p>
+  <p>For clients and stakeholders, an animatic answers the question: does this idea actually work as a video? It is significantly cheaper to fix a pacing problem in an animatic than in a finished production. For a grassroots brand where budgets are real constraints, this stage protects both the creative vision and the resources needed to execute it.</p>
+  <p>The Solar animatic was produced in greyscale. This is a deliberate convention: greyscale removes the distraction of colour so that composition, movement, and sequence can be evaluated on their own terms.</p>
+</section>
+
+<!-- VIDEO PLACEHOLDER -->
+<video controls style="width:100%;border-radius:4px;margin:32px 0;display:block;background:#000;">
+  <source src="SOLAR ANIMATIC.mp4" type="video/mp4">
+</video>
+
+<hr class="divider">
+
+<!-- AD CAMPAIGN / SCENES -->
+<section>
+  <h2>Ad Campaign</h2>
+  <p class="campaign-line">"Join Our Conservation Efforts."</p>
+  <p>The campaign leads with people, specifically with joy. If you see people having a good time doing something meaningful, you want to be part of it. The ad does not tell the audience that conservation matters. It shows them a group of people who already know that, and makes room for one more.</p>
+
+  <h3>The Spot</h3>
+  <div class="scenes">
+    <div class="scene">
+      <span class="scene-num">01</span>
+      <div class="scene-content">
+        <strong>The Direct Address</strong>
+        <p>A female volunteer stands in frame facing the camera. She is smiling, genuinely present. The moment of direct eye contact creates connection before anything else happens. She is the bridge between the audience and the world she is about to show them.</p>
+      </div>
+    </div>
+    <div class="scene">
+      <span class="scene-num">02</span>
+      <div class="scene-content">
+        <strong>The Reveal</strong>
+        <p>She extends her arm outward and the camera pans with her movement to reveal a wider scene: more people, more energy. One person inviting you in, then showing you the community waiting on the other side.</p>
+      </div>
+    </div>
+    <div class="scene">
+      <span class="scene-num">03</span>
+      <div class="scene-content">
+        <strong>The Cheer</strong>
+        <p>The group notices the camera. They pose, cheer, raise their hands. Candid and loose. This frame should feel found, not staged.</p>
+      </div>
+    </div>
+    <div class="scene">
+      <span class="scene-num">04</span>
+      <div class="scene-content">
+        <strong>The Work</strong>
+        <p>A two-second behind-the-scenes cut showing people in motion, working, moving, doing. This is the credibility beat. Conservation is physical. This frame shows that.</p>
+      </div>
+    </div>
+    <div class="scene">
+      <span class="scene-num">05</span>
+      <div class="scene-content">
+        <strong>The Payoff</strong>
+        <p>The group holds up a Solar banner together. A still image within the motion, a moment worth photographing. Effort completed, community confirmed.</p>
+      </div>
+    </div>
+    <div class="scene">
+      <span class="scene-num">06</span>
+      <div class="scene-content">
+        <strong>The Call to Action</strong>
+        <p>Cut to: "Join our conservation efforts!" The Solar logo symbol holds the frame. Clean. No clutter.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- BRAND VOICE -->
+<section>
+  <h2>Brand Voice</h2>
+  <p>Solar's voice is that of a committed person talking to a friend, not a brand talking to an audience. It is warm without being soft, urgent without being alarmist, and community-minded without being preachy.</p>
+
+  <h3>Tone and Register</h3>
+  <p>Direct, active, grounded. Write like someone who has been outside doing the work and wants others to join them. Conversational but not casual. Solar is serious about what it does. The voice reflects that without becoming stiff or institutional.</p>
+
+  <h3>Key Principles</h3>
+  <ul class="voice-list">
+    <li>Active voice always. "We planted 400 trees" not "400 trees were planted."</li>
+    <li>Short sentences. If a sentence needs a second comma, break it in two.</li>
+    <li>Lead with people, not problems. Solar does not guilt the audience into action. It invites them into something already happening.</li>
+    <li>Use action verbs, specific details, first and second person. We, you, us, here, now.</li>
+  </ul>
+
+  <div class="two-col">
+    <div class="col-block avoid">
+      <h4>Avoid</h4>
+      <ul>
+        <li>"Sustainability"</li>
+        <li>"Eco-friendly"</li>
+        <li>"Make a difference"</li>
+        <li>"The planet needs you"</li>
+      </ul>
+    </div>
+    <div class="col-block use">
+      <h4>Use</h4>
+      <ul>
+        <li>Action verbs</li>
+        <li>Specific details</li>
+        <li>First and second person</li>
+        <li>Short, direct sentences</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Example Copy</h3>
+  <div class="copy-examples">
+    <p>"Conservation looks like this."</p>
+    <p>"Show up. Work hard. Be part of something."</p>
+    <p>"The land needs people. We need you."</p>
+    <p>"This is what effort looks like."</p>
+  </div>
+
+  <h3>What Solar Does Not Sound Like</h3>
+  <p>A charity appeal. A government PSA. A wellness brand that discovered nature.</p>
+</section>
+
+<footer>
+  <p>Solar is a speculative brand project. All work shown is conceptual and created for portfolio purposes.</p>
+</footer>
+
+
+<!-- ABOUT OVERLAY -->
+<div class="about-overlay" id="about-overlay">
+  <div class="about-close">
+    <div class="about-close-inner">
+      <span>Amandeep Kaur</span>
+      <button class="about-back" onclick="closeAbout()">Close</button>
+    </div>
+  </div>
+  <div class="about-inner">
+    <h1 class="about-name">
+      Amandeep<br>Kaur
+      <span>a builder of ideas at the intersection of<br>creativity, innovation, and impact.</span>
+    </h1>
+    <div class="about-body">
+      <p>I aim for creative direction roles. BBA graduate with a keen sociological eye by hobby. I like storytelling and developing ad campaigns with coherence across media.</p>
+      <p>I started my journey by founding my college's marketing team in collaboration with my faculty HOD, and by immersing myself in artbooks from Sony Animation Studios.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  const overlay = document.getElementById('about-overlay');
+  const aboutLink = document.querySelector('a[href="#about"]');
+
+  aboutLink.addEventListener('click', function(e) {
+    e.preventDefault();
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+
+  function closeAbout() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeAbout();
+  });
+</script>
+
+</body>
+</html>

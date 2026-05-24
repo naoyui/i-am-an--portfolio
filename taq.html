@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Alternate Quest — Case Study</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --orange: #FF914D;
+    --black:  #111;
+    --mid:    #555;
+    --light:  #aaa;
+  }
+
+  html { font-size: 16px; }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid #ebebeb;
+  }
+
+  .nav-inner {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 0 32px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--black);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .nav-links a:hover { color: var(--orange); }
+
+  body {
+    background: #fff;
+    color: var(--black);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.75;
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 116px 32px 120px;
+  }
+
+  header {
+    margin-bottom: 80px;
+    border-bottom: 1px solid #e8e8e8;
+    padding-bottom: 40px;
+  }
+
+  .brand-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.4rem, 6vw, 3.8rem);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--black);
+    margin-bottom: 20px;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    color: var(--mid);
+    font-weight: 300;
+    max-width: 520px;
+  }
+
+  section { margin-bottom: 72px; }
+
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.65rem;
+    font-weight: 400;
+    color: var(--black);
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+
+  h3 {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 12px;
+    margin-top: 36px;
+  }
+
+  h3:first-child { margin-top: 0; }
+
+  p {
+    font-size: 0.975rem;
+    color: #333;
+    margin-bottom: 16px;
+    font-weight: 300;
+  }
+
+  p:last-child { margin-bottom: 0; }
+
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin: 32px 0;
+  }
+
+  .stat {
+    padding: 28px 24px;
+    background: #fafafa;
+    border-radius: 4px;
+  }
+
+  .stat-number {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.2rem;
+    font-weight: 400;
+    color: var(--black);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--light);
+    line-height: 1.5;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid #ebebeb;
+    margin: 0 0 72px;
+  }
+
+  .placeholder-img {
+    width: 100%;
+    background: #f2f2f2;
+    border: 1px dashed #d0d0d0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+    border-radius: 4px;
+    margin: 32px 0;
+    padding: 48px 0;
+  }
+
+  .placeholder-img span {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--light);
+  }
+
+  .taq-img {
+    width: 100%;
+    display: block;
+    border-radius: 4px;
+    margin: 32px 0;
+  }
+
+  .pull {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--black);
+    border-left: 2px solid var(--orange);
+    padding-left: 24px;
+    margin: 28px 0;
+    line-height: 1.55;
+  }
+
+  /* ABOUT OVERLAY */
+  .about-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: #fff;
+    overflow-y: auto;
+  }
+
+  .about-overlay.open { display: block; }
+
+  .overlay-nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 201;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid #ebebeb;
+  }
+
+  .overlay-nav-inner {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 0 32px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .overlay-nav-inner span {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--black);
+  }
+
+  .btn-close {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mid);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.15s;
+  }
+
+  .btn-close:hover { color: var(--orange); }
+
+  .about-inner {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 100px 32px 120px;
+  }
+
+  .about-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.6rem, 7vw, 4.2rem);
+    font-weight: 400;
+    line-height: 1.05;
+    color: var(--black);
+    margin-bottom: 40px;
+  }
+
+  .about-name span {
+    display: block;
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--mid);
+    margin-top: 8px;
+    line-height: 1.55;
+  }
+
+  .about-body {
+    border-top: 1px solid #ebebeb;
+    padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 520px;
+  }
+
+  .about-body p {
+    font-size: 1rem;
+    color: #333;
+    font-weight: 300;
+    line-height: 1.8;
+    margin-bottom: 0;
+  }
+
+  footer {
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid #ebebeb;
+  }
+
+  footer p {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: #bbb;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 520px) {
+    body { padding: 100px 20px 80px; }
+    .nav-inner, .overlay-nav-inner { padding: 0 20px; }
+    .stat-row { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-name">Amandeep Kaur</a>
+    <ul class="nav-links">
+      <li><a href="#" onclick="openAbout(event)">About</a></li>
+      <li><a href="https://www.linkedin.com/in/amandeep-kaur-64a937295/" target="_blank" rel="noopener">LinkedIn</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header>
+  <p class="brand-tag">Portfolio — Case Study</p>
+  <h1>The Alternate<br>Quest</h1>
+  <p class="subtitle">A hiring platform that replaced resumes with real work, built to connect students to paid remote internships through startup problems.</p>
+</header>
+
+<!-- PROJECT OVERVIEW -->
+<section>
+  <h2>Project Overview</h2>
+  <p>The Alternate Quest started from a simple observation: resumes tell you what someone has done, not what they can do. For students with no work history, the resume is an almost useless document. And for early-stage startups looking for sharp, motivated collaborators, filtering by GPA and club memberships misses the point entirely.</p>
+  <p>TAQ proposed a different system. Instead of applications, students were assigned real startup problems. What they shipped in response became their candidacy. The work itself was the pitch.</p>
+  <p>The project was incubated at NSRCEL IIMB from 2024 to 2025. In its first cohort, run over two months, TAQ secured paid remote jobs for full-time students, with no commute requirement and no experience prerequisite beyond the ability to show up and build.</p>
+
+  <div class="stat-row">
+    <div class="stat">
+      <p class="stat-number">1</p>
+      <p class="stat-label">Cohort<br>completed</p>
+    </div>
+    <div class="stat">
+      <p class="stat-number">2</p>
+      <p class="stat-label">Months<br>to run</p>
+    </div>
+    <div class="stat">
+      <p class="stat-number">100%</p>
+      <p class="stat-label">Remote &amp;<br>paid roles</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- THE PROBLEM -->
+<section>
+  <h2>The Problem</h2>
+
+  <h3>For students</h3>
+  <p>Entry-level roles increasingly ask for experience. Students in full-time degree programmes rarely have the time or access to build a traditional CV. The standard advice, "do internships to get internships," is circular and excludes those who need it most.</p>
+
+  <h3>For startups</h3>
+  <p>Early-stage teams need people who can operate with ambiguity and actually ship things. Resume screening selects for polish, not capability. By the time a startup finds someone useful through conventional hiring, they've spent weeks on a process that wasn't designed for them.</p>
+
+  <div class="pull">"Instead of resumes, TAQ focused on what students built and shipped."</div>
+</section>
+
+<hr class="divider">
+
+<!-- THE APPROACH -->
+<section>
+  <h2>The Approach</h2>
+
+  <h3>Problem-based candidacy</h3>
+  <p>Startup partners submitted real, scoped problems. Students were given these as their entry point. The submission wasn't a cover letter or a grade, it was a working solution, a prototype, a strategy deck, or a research output depending on the brief.</p>
+
+  <h3>Remote and paid by design</h3>
+  <p>Both conditions were non-negotiable from the start. Remote meant students in any city could participate without uprooting their academic schedule. Paid meant the work was treated as real labour, not a favour students owed to their career prospects. The model only worked if both sides had genuine stakes.</p>
+
+  <h3>Incubation at NSRCEL IIMB</h3>
+  <p>Being incubated at NSRCEL gave TAQ credibility with startup partners and access to a network that took the project seriously as an operational experiment rather than a student initiative. The institutional anchor mattered for the first cohort, where the model had not yet proven itself through outcomes.</p>
+</section>
+
+<hr class="divider">
+
+<!-- WEBSITE -->
+<section>
+  <h2>Website</h2>
+  <p>The TAQ website was designed to reflect the platform's core idea: strip the noise, show the work. Below is the full homepage.</p>
+  <img src="T.A.Q. website pdf-1.png" alt="The Alternate Quest — Website Homepage" class="taq-img">
+</section>
+
+<footer>
+  <p>The Alternate Quest is a real project. Case study written for portfolio purposes.</p>
+</footer>
+
+<!-- ABOUT OVERLAY -->
+<div class="about-overlay" id="about-overlay">
+  <div class="overlay-nav">
+    <div class="overlay-nav-inner">
+      <span>Amandeep Kaur</span>
+      <button class="btn-close" onclick="closeAbout()">Close</button>
+    </div>
+  </div>
+  <div class="about-inner">
+    <h1 class="about-name">
+      Amandeep<br>Kaur
+      <span>a builder of ideas at the intersection of<br>creativity, innovation, and impact.</span>
+    </h1>
+    <div class="about-body">
+      <p>I aim for creative direction roles. BBA graduate with a keen sociological eye by hobby. I like storytelling and developing ad campaigns with coherence across media.</p>
+      <p>I started my journey by founding my college's marketing team in collaboration with my faculty HOD, and by immersing myself in artbooks from Sony Animation Studios.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openAbout(e) {
+    e.preventDefault();
+    document.getElementById('about-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeAbout() {
+    document.getElementById('about-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeAbout();
+  });
+</script>
+
+</body>
+</html>
