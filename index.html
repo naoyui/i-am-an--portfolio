@@ -13,7 +13,7 @@
     --orange: #FF914D;
     --black:  #111;
     --mid:    #555;
-    --light:  #aaa;
+    --light:  #888;
   }
 
   html { font-size: 16px; }
@@ -25,7 +25,7 @@
     background: rgba(255,255,255,0.92);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    border-bottom: 1px solid #ebebeb;
+    border-bottom: 1px solid #d8d8d8;
   }
 
   .nav-inner {
@@ -79,7 +79,7 @@
     max-width: 900px;
     margin: 0 auto;
     padding: 80px 40px 64px;
-    border-bottom: 1px solid #ebebeb;
+    border-bottom: 1px solid #d8d8d8;
   }
 
   .intro-tag {
@@ -111,7 +111,7 @@
   .work-section {
     max-width: 900px;
     margin: 0 auto;
-    padding: 64px 40px 120px;
+    padding: 72px 40px 100px;
   }
 
   .work-label {
@@ -121,6 +121,7 @@
     text-transform: uppercase;
     color: var(--light);
     margin-bottom: 40px;
+    padding-left: 20px;
   }
 
   .work-list {
@@ -134,13 +135,17 @@
     align-items: start;
     gap: 32px;
     padding: 36px 0;
-    border-top: 1px solid #ebebeb;
+    border-top: 1px solid #d8d8d8;
     text-decoration: none;
     color: inherit;
     cursor: pointer;
   }
 
-  .work-card:last-child { border-bottom: 1px solid #ebebeb; }
+  .work-card:last-child { border-bottom: 1px solid #d8d8d8; }
+
+  .work-card.card-solar { background: linear-gradient(135deg, rgba(255,145,77,0.06) 0%, rgba(237,188,139,0.08) 100%); padding-left: 20px; padding-right: 20px; border-radius: 6px; }
+  .work-card.card-taq   { background: linear-gradient(135deg, rgba(241,254,0,0.05) 0%, rgba(165,167,163,0.07) 100%); padding-left: 20px; padding-right: 20px; border-radius: 6px; }
+  .work-card.card-dsa   { background: linear-gradient(135deg, rgba(212,115,44,0.06) 0%, rgba(222,221,198,0.15) 100%); padding-left: 20px; padding-right: 20px; border-radius: 6px; }
   .work-card:hover .card-title { color: var(--orange); }
   .work-card:hover .card-arrow { transform: translate(3px, -3px); color: var(--orange); }
 
@@ -184,14 +189,14 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--mid);
-    border: 1px solid #e0e0e0;
+    border: 1px solid #c8c8c8;
     padding: 4px 10px;
     border-radius: 2px;
   }
 
   .card-arrow {
     font-size: 1.1rem;
-    color: #ccc;
+    color: #aaa;
     transition: transform 0.2s, color 0.15s;
     padding-top: 6px;
     flex-shrink: 0;
@@ -216,7 +221,7 @@
     background: rgba(255,255,255,0.92);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    border-bottom: 1px solid #ebebeb;
+    border-bottom: 1px solid #d8d8d8;
   }
 
   .overlay-nav-inner {
@@ -279,7 +284,7 @@
   }
 
   .about-body {
-    border-top: 1px solid #ebebeb;
+    border-top: 1px solid #d8d8d8;
     padding-top: 40px;
     display: flex;
     flex-direction: column;
@@ -313,17 +318,13 @@
   </div>
 </nav>
 
-<div class="intro">
-  <p class="intro-tag">Portfolio</p>
-  <h1>Selected<br>Work</h1>
-  <p>Brand identity, campaign strategy, and product thinking across media.</p>
-</div>
+
 
 <div class="work-section">
   <p class="work-label">Projects</p>
   <div class="work-list">
 
-    <a href="solar-case-study.html" class="work-card">
+    <a href="solar-case-study.html" class="work-card card-solar">
       <div>
         <p class="card-meta">Brand Identity &amp; Campaign</p>
         <h2 class="card-title">Solar</h2>
@@ -338,7 +339,7 @@
       <span class="card-arrow">&#8599;</span>
     </a>
 
-    <a href="taq.html" class="work-card">
+    <a href="taq.html" class="work-card card-taq">
       <div>
         <p class="card-meta">Product &amp; Strategy — 2024–2025</p>
         <h2 class="card-title">The Alternate Quest</h2>
@@ -348,6 +349,20 @@
           <span class="tag">Product</span>
           <span class="tag">Education</span>
           <span class="tag">Summer Project</span>
+        </div>
+      </div>
+      <span class="card-arrow">&#8599;</span>
+
+    <a href="dsa.html" class="work-card card-dsa">
+      <div>
+        <p class="card-meta">Product Design — Hypothetical</p>
+        <h2 class="card-title">Digital Stone Age</h2>
+        <p class="card-desc">A Gen Z device detox app that makes willpower measurable. Set your session, put the phone down, and find out exactly how long you lasted. Any touch ends the round.</p>
+        <div class="card-tags">
+          <span class="tag">Product</span>
+          <span class="tag">App Design</span>
+          <span class="tag">UX Concept</span>
+          <span class="tag">Play Store Mockup</span>
         </div>
       </div>
       <span class="card-arrow">&#8599;</span>
