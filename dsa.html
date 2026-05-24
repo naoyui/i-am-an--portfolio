@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Stone Age — Case Study</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --dsa-brown:  #d4732c;
+    --dsa-cream:  #deddc6;
+    --dsa-orange: #fd9e5c;
+    --black:  #111;
+    --mid:    #555;
+    --light:  #aaa;
+  }
+
+  html { font-size: 16px; }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid #ebebeb;
+  }
+
+  .nav-inner {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 0 32px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--black);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .nav-links a:hover { color: var(--dsa-brown); }
+
+  body {
+    background: #fff;
+    color: var(--black);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.75;
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 116px 32px 120px;
+  }
+
+  header {
+    margin-bottom: 64px;
+    border-bottom: 1px solid #e8e8e8;
+    padding-bottom: 40px;
+  }
+
+  .brand-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--dsa-brown);
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.4rem, 6vw, 3.8rem);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--black);
+    margin-bottom: 20px;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    color: var(--mid);
+    font-weight: 300;
+    max-width: 520px;
+  }
+
+  section { margin-bottom: 48px; }
+
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.65rem;
+    font-weight: 400;
+    color: var(--black);
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+
+  h3 {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--dsa-orange);
+    margin-bottom: 12px;
+    margin-top: 36px;
+  }
+
+  h3:first-child { margin-top: 0; }
+
+  p {
+    font-size: 0.975rem;
+    color: #333;
+    margin-bottom: 16px;
+    font-weight: 300;
+  }
+
+  p:last-child { margin-bottom: 0; }
+
+  .divider {
+    border: none;
+    border-top: 1px solid #ebebeb;
+    margin: 0 0 44px;
+  }
+
+  /* SWATCHES — same pattern as Solar */
+  .swatches {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+
+  .swatch-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .swatch {
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .swatch-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--mid);
+    min-width: 80px;
+  }
+
+  .swatch-desc {
+    font-size: 0.875rem;
+    color: var(--mid);
+    font-weight: 300;
+  }
+
+  /* LOGO */
+  .logo-block {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin: 24px 0;
+    padding: 24px;
+    background: var(--dsa-cream);
+    border-radius: 6px;
+  }
+
+  .logo-svg {
+    flex-shrink: 0;
+  }
+
+  .logo-desc {
+    font-size: 0.9rem;
+    color: var(--mid);
+    font-weight: 300;
+    line-height: 1.65;
+    margin-bottom: 0;
+  }
+
+  /* PULL */
+  .pull {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--dsa-brown);
+    border-left: 2px solid var(--dsa-orange);
+    padding-left: 24px;
+    margin: 28px 0;
+    line-height: 1.55;
+  }
+
+  /* FEATURE LIST */
+  .feature-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .feature-list li {
+    font-size: 0.95rem;
+    color: #333;
+    font-weight: 300;
+    padding-left: 18px;
+    position: relative;
+    line-height: 1.65;
+  }
+
+  .feature-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 11px;
+    width: 6px;
+    height: 1px;
+    background: var(--dsa-brown);
+  }
+
+  /* MEDIA */
+  .media-item {
+    width: 100%;
+    display: block;
+    border-radius: 4px;
+    margin: 32px 0;
+  }
+
+  video.media-item { background: #000; }
+
+  /* ABOUT OVERLAY */
+  .about-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: #fff;
+    overflow-y: auto;
+  }
+
+  .about-overlay.open { display: block; }
+
+  .overlay-nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 201;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid #ebebeb;
+  }
+
+  .overlay-nav-inner {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 0 32px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .overlay-nav-inner span {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--black);
+  }
+
+  .btn-close {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mid);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.15s;
+  }
+
+  .btn-close:hover { color: var(--dsa-brown); }
+
+  .about-inner {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 100px 32px 120px;
+  }
+
+  .about-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.6rem, 7vw, 4.2rem);
+    font-weight: 400;
+    line-height: 1.05;
+    color: var(--black);
+    margin-bottom: 40px;
+  }
+
+  .about-name span {
+    display: block;
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--mid);
+    margin-top: 8px;
+    line-height: 1.55;
+  }
+
+  .about-body {
+    border-top: 1px solid #ebebeb;
+    padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 520px;
+  }
+
+  .about-body p {
+    font-size: 1rem;
+    color: #333;
+    font-weight: 300;
+    line-height: 1.8;
+    margin-bottom: 0;
+  }
+
+  footer {
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid #ebebeb;
+  }
+
+  footer p {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: #bbb;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 520px) {
+    body { padding: 100px 20px 80px; }
+    .nav-inner, .overlay-nav-inner { padding: 0 20px; }
+    .logo-block { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-name">Amandeep Kaur</a>
+    <ul class="nav-links">
+      <li><a href="#" onclick="openAbout(event)">About</a></li>
+      <li><a href="https://www.linkedin.com/in/amandeep-kaur-64a937295/" target="_blank" rel="noopener">LinkedIn</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header>
+  <p class="brand-tag">Portfolio — Case Study</p>
+  <h1>Digital<br>Stone Age</h1>
+  <p class="subtitle">A hypothetical Gen Z device detox app. The brief: if you already know you're addicted to your phone, what does it look like to make that fact measurable?</p>
+</header>
+
+<!-- PROJECT OVERVIEW -->
+<section>
+  <h2>Project Overview</h2>
+  <p>The starting point for Digital Stone Age was a behavioural observation rather than a product gap. Most digital wellness tools operate on disclosure: they show you, after the fact, how much time you spent and on what. The assumption is that awareness produces change.</p>
+  <p>The brief I set for this project was narrower: design something that doesn't inform you, it catches you. The concept is simple and a little absurd — you set a desired detox window, and if the phone is picked up or held at any point within it, the timer stops and shows you exactly how long your willpower lasted. A completely extreme idea, presented completely seriously.</p>
+  <p>The deliverables were a Google Play Store mockup, a brand identity with palette and logo, and a preview video.</p>
+</section>
+
+<hr class="divider">
+
+<!-- BRAND IDENTITY -->
+<section>
+  <h2>Brand Identity</h2>
+
+  <h3>Colour Palette</h3>
+  <p>The palette was built to feel like something physical and worn, not a tech product. Nothing here reads as a wellness app.</p>
+
+  <div class="swatches">
+    <div class="swatch-row">
+      <div class="swatch" style="background:#d4732c;"></div>
+      <span class="swatch-label">#D4732C</span>
+      <span class="swatch-desc">Burnt sienna. The primary. Earthy, direct, tactile.</span>
+    </div>
+    <div class="swatch-row">
+      <div class="swatch" style="background:#fd9e5c;"></div>
+      <span class="swatch-label">#FD9E5C</span>
+      <span class="swatch-desc">Warm amber. Secondary. Approachable, faded heat.</span>
+    </div>
+    <div class="swatch-row">
+      <div class="swatch" style="background:#deddc6;"></div>
+      <span class="swatch-label">#DEDDC6</span>
+      <span class="swatch-desc">Limestone. Background tone. Aged, quiet, grounded.</span>
+    </div>
+  </div>
+
+</section>
+
+<hr class="divider">
+
+<!-- THE CONCEPT -->
+<section>
+  <h2>The Concept</h2>
+
+  <h3>What I was designing around</h3>
+  <p>The Pomodoro technique exists to help people work in focused intervals. DSA borrows the structure and inverts the purpose. The app is not about productivity. The phone is not a tool you are being helped to use better. It is the thing you are trying to put down. That inversion needed to be felt in every design decision, including what the app does not do: it does not congratulate you, notify you, or ask you to share.</p>
+
+  <h3>The mechanic</h3>
+  <p>You set a focus duration, a break duration, and a number of cycles. During focus time, any touch, pick-up, or detected motion ends the round and logs exactly how far you got. During breaks the phone is yours.</p>
+
+
+</section>
+
+<hr class="divider">
+
+<!-- PLAY STORE MOCKUP -->
+<section>
+  <h2>Play Store Mockup</h2>
+  <img src="Digital Stone Age (1).png" alt="Digital Stone Age — Google Play Store Mockup" class="media-item">
+</section>
+
+<hr class="divider">
+
+<!-- PREVIEW VIDEO -->
+<section>
+  <h2>Preview Video</h2>
+  <video controls class="media-item">
+    <source src="Digital Stone Age.mp4" type="video/mp4">
+  </video>
+</section>
+
+<footer>
+  <p>Digital Stone Age is a speculative product. All work shown is conceptual and created for portfolio purposes.</p>
+</footer>
+
+<!-- ABOUT OVERLAY -->
+<div class="about-overlay" id="about-overlay">
+  <div class="overlay-nav">
+    <div class="overlay-nav-inner">
+      <span>Amandeep Kaur</span>
+      <button class="btn-close" onclick="closeAbout()">Close</button>
+    </div>
+  </div>
+  <div class="about-inner">
+    <h1 class="about-name">
+      Amandeep<br>Kaur
+      <span>a builder of ideas at the intersection of<br>creativity, innovation, and impact.</span>
+    </h1>
+    <div class="about-body">
+      <p>I aim for creative direction roles. BBA graduate with a keen sociological eye by hobby. I like storytelling and developing ad campaigns with coherence across media.</p>
+      <p>I started my journey by founding my college's marketing team in collaboration with my faculty HOD, and by immersing myself in artbooks from Sony Animation Studios.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openAbout(e) {
+    e.preventDefault();
+    document.getElementById('about-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeAbout() {
+    document.getElementById('about-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeAbout();
+  });
+</script>
+
+</body>
+</html>
