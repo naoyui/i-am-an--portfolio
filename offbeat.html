@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OFF/BEAT Application — Case Study</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:     #0a0a0a;
+    --white:  #ffffff;
+    --pink:   #ff2d6b;
+    --gray:   #888;
+    --border: #222;
+  }
+
+  html { font-size: 16px; }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-inner {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 0 32px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gray);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .nav-links a:hover { color: var(--pink); }
+
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.75;
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 116px 32px 120px;
+  }
+
+  header {
+    margin-bottom: 64px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 40px;
+  }
+
+  .brand-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.4rem, 6vw, 3.8rem);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--white);
+    margin-bottom: 20px;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    color: var(--gray);
+    font-weight: 300;
+    max-width: 520px;
+  }
+
+  section { margin-bottom: 48px; }
+
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.65rem;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+
+  h3 {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 12px;
+    margin-top: 36px;
+  }
+
+  h3:first-child { margin-top: 0; }
+
+  p {
+    font-size: 0.975rem;
+    color: #ccc;
+    margin-bottom: 16px;
+    font-weight: 300;
+  }
+
+  p:last-child { margin-bottom: 0; }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0 0 44px;
+  }
+
+  /* APPROACH BLOCKS */
+  .approach-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 8px;
+  }
+
+  .approach-item {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 24px 28px;
+    transition: border-color 0.2s;
+  }
+
+  .approach-item:hover { border-color: #444; }
+
+  .approach-item h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: var(--pink);
+  }
+
+  .approach-item p {
+    margin-bottom: 0;
+    color: var(--gray);
+    font-size: 0.9rem;
+  }
+
+  /* CTA LINK */
+  .cta-block {
+    margin-top: 48px;
+    padding: 32px 28px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    text-decoration: none;
+    transition: border-color 0.2s;
+  }
+
+  .cta-block:hover { border-color: var(--pink); }
+
+  .cta-block:hover .cta-arrow { color: var(--pink); transform: translate(3px, -3px); }
+
+  .cta-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 8px;
+  }
+
+  .cta-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1.2;
+  }
+
+  .cta-arrow {
+    font-size: 1.3rem;
+    color: #444;
+    flex-shrink: 0;
+    transition: transform 0.2s, color 0.15s;
+  }
+
+  /* ABOUT OVERLAY */
+  .about-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: var(--bg);
+    overflow-y: auto;
+  }
+
+  .about-overlay.open { display: block; }
+
+  .overlay-nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 201;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .overlay-nav-inner {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 0 32px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .overlay-nav-inner span {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+
+  .btn-close {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gray);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.15s;
+  }
+
+  .btn-close:hover { color: var(--pink); }
+
+  .about-inner {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 100px 32px 120px;
+  }
+
+  .about-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.6rem, 7vw, 4.2rem);
+    font-weight: 400;
+    line-height: 1.05;
+    color: var(--white);
+    margin-bottom: 40px;
+  }
+
+  .about-name span {
+    display: block;
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--gray);
+    margin-top: 8px;
+    line-height: 1.55;
+  }
+
+  .about-body {
+    border-top: 1px solid var(--border);
+    padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 520px;
+  }
+
+  .about-body p {
+    font-size: 1rem;
+    color: #ccc;
+    font-weight: 300;
+    line-height: 1.8;
+    margin-bottom: 0;
+  }
+
+  footer {
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  footer p {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: #444;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 520px) {
+    body { padding: 100px 20px 80px; }
+    .nav-inner, .overlay-nav-inner { padding: 0 20px; }
+    .cta-block { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-name">Amandeep Kaur</a>
+    <ul class="nav-links">
+      <li><a href="#" onclick="openAbout(event)">About</a></li>
+      <li><a href="https://www.linkedin.com/in/amandeep-kaur-64a937295/" target="_blank" rel="noopener">LinkedIn</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header>
+  <p class="brand-tag">Portfolio — Case Study</p>
+  <h1>OFF/BEAT<br>Application Site</h1>
+  <p class="subtitle">A single-page interactive website built to apply to a company that wouldn't say what they do.</p>
+</header>
+
+<section>
+  <h2>Project Overview</h2>
+  <p><a href="https://offbeatkartakyahai.xyz/" target="_blank" rel="noopener" style="color:var(--pink);text-decoration:none;border-bottom:1px solid var(--pink);">OFF/BEAT launched with a website</a> that revealed five fake products one click at a time before asking you to apply. The format was a personality test disguised as a product launch. It was also genuinely good brand writing.</p>
+  <p>The application form asked sharp questions. But a form answer sits in a spreadsheet. A website that mirrors the exact format, energy, and logic of the company you're applying to sits in a browser tab and keeps working.</p>
+  <p>This was built to answer one brief: what would an OFF/BEAT hiring page look like if the candidate made it instead of the company?</p>
+</section>
+
+<hr class="divider">
+
+<section>
+  <h2>The Approach</h2>
+  <div class="approach-list">
+    <div class="approach-item">
+      <h3>Mirror the format, not the content</h3>
+      <p>OFF/BEAT used fake product reveals to test whether someone had patience and curiosity. The response used the same mechanic to deliver real proof of work. Same structure, different direction.</p>
+    </div>
+    <div class="approach-item">
+      <h3>Copy as strategy</h3>
+      <p>Every bullet on every page is doing two things: making you smile and telling you something true. That's the job of brand copy. The site was an exercise in writing that earns its own attention.</p>
+    </div>
+    <div class="approach-item">
+      <h3>No scroll, no noise</h3>
+      <p>One viewport. One click at a time. The constraint was intentional. OFF/BEAT's site doesn't let you skim. Neither does this one.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <h2>The Site</h2>
+  <p>Built as a standalone interactive page. Each click advances the reveal, the same way OFF/BEAT's product pages did. The writing carries the structure.</p>
+
+  <a href="https://naoyui.github.io/AMAN-KAUR-karti-kya-hai/" target="_blank" rel="noopener" class="cta-block">
+    <div>
+      <p class="cta-label">Live Project</p>
+      <p class="cta-title">AMAN/KAUR<br>kartikyahai</p>
+    </div>
+    <span class="cta-arrow">&#8599;</span>
+  </a>
+</section>
+
+<footer>
+  <p>OFF/BEAT application. Built as a portfolio piece and direct application.</p>
+</footer>
+
+<!-- ABOUT OVERLAY -->
+<div class="about-overlay" id="about-overlay">
+  <div class="overlay-nav">
+    <div class="overlay-nav-inner">
+      <span>Amandeep Kaur</span>
+      <button class="btn-close" onclick="closeAbout()">Close</button>
+    </div>
+  </div>
+  <div class="about-inner">
+    <h1 class="about-name">
+      Amandeep<br>Kaur
+      <span>a builder of ideas at the intersection of<br>creativity, innovation, and impact.</span>
+    </h1>
+    <div class="about-body">
+      <p>I aim for creative direction roles. BBA graduate with a keen sociological eye by hobby. I like storytelling and developing ad campaigns with coherence across media.</p>
+      <p>I started my journey by founding my college's marketing team in collaboration with my faculty HOD, and by immersing myself in artbooks from Sony Animation Studios.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openAbout(e) {
+    e.preventDefault();
+    document.getElementById('about-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeAbout() {
+    document.getElementById('about-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeAbout();
+  });
+</script>
+
+</body>
+</html>
