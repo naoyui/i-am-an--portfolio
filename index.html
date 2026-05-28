@@ -114,6 +114,22 @@
     padding: 72px 40px 100px;
   }
 
+  .subline-dash {
+    color: var(--orange);
+    font-style: normal;
+    margin-right: 6px;
+  }
+
+  .work-subline {
+    font-family: 'DM Serif Display', serif;
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--light);
+    margin-top: -28px;
+    margin-bottom: 40px;
+    padding-left: 20px;
+  }
+
   .work-label {
     font-family: 'DM Mono', monospace;
     font-size: 11px;
@@ -143,6 +159,7 @@
 
   .work-card:last-child { border-bottom: 1px solid #d8d8d8; }
 
+  .work-card.card-ipl   { background: linear-gradient(135deg, rgba(0,63,138,0.05) 0%, rgba(200,146,42,0.07) 100%); padding-left: 20px; padding-right: 20px; border-radius: 6px; }
   .work-card.card-solar { background: linear-gradient(135deg, rgba(255,145,77,0.06) 0%, rgba(237,188,139,0.08) 100%); padding-left: 20px; padding-right: 20px; border-radius: 6px; }
   .work-card.card-taq   { background: linear-gradient(135deg, rgba(241,254,0,0.05) 0%, rgba(165,167,163,0.07) 100%); padding-left: 20px; padding-right: 20px; border-radius: 6px; }
   .work-card.card-offbeat { background: linear-gradient(135deg, rgba(255,45,107,0.05) 0%, rgba(20,20,20,0.04) 100%); padding-left: 20px; padding-right: 20px; border-radius: 6px; }
@@ -323,7 +340,23 @@
 
 <div class="work-section">
   <p class="work-label">Projects</p>
+  <p class="work-subline"><span class="subline-dash">—</span> brand, campaign, and story</p>
       <div class="work-list">
+
+        <a href="ipl.html" class="work-card card-ipl">
+      <div>
+        <p class="card-meta">Ad Concepts &amp; Animatics</p>
+        <h2 class="card-title">IPL Season Ad Concepts</h2>
+        <p class="card-desc">Three animatic concepts for a hair care brand during IPL season. Two men's variations (explicit and subtle) and a women's POV social media envy appeal. Light-hearted throughout.</p>
+        <div class="card-tags">
+          <span class="tag">Ad Concept</span>
+          <span class="tag">Animatic</span>
+          <span class="tag">Copywriting</span>
+          <span class="tag">Campaign</span>
+        </div>
+      </div>
+      <span class="card-arrow">&#8599;</span>
+    </a>
 
     <a href="solar-case-study.html" class="work-card card-solar">
       <div>
