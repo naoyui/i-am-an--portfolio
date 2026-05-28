@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IPL Season Ad Concepts — Case Study</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ipl-blue:   #003f8a;
+    --ipl-gold:   #c8922a;
+    --ipl-light:  #e8a83a;
+    --black:  #111;
+    --mid:    #555;
+    --light:  #888;
+    --bg:     #ffffff;
+    --border: #e0e0e0;
+  }
+
+  html { font-size: 16px; }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-inner {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 0 32px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--black);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .nav-links a:hover { color: var(--ipl-blue); }
+
+  body {
+    background: var(--bg);
+    color: var(--black);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.75;
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 116px 32px 120px;
+  }
+
+  header {
+    margin-bottom: 64px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 40px;
+  }
+
+  .brand-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ipl-gold);
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.4rem, 6vw, 3.8rem);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--black);
+    margin-bottom: 20px;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    color: var(--mid);
+    font-weight: 300;
+    max-width: 520px;
+  }
+
+  section { margin-bottom: 48px; }
+
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.65rem;
+    font-weight: 400;
+    color: var(--black);
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+
+  h3 {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ipl-gold);
+    margin-bottom: 12px;
+    margin-top: 36px;
+  }
+
+  h3:first-child { margin-top: 0; }
+
+  p {
+    font-size: 0.975rem;
+    color: #333;
+    margin-bottom: 16px;
+    font-weight: 300;
+  }
+
+  p:last-child { margin-bottom: 0; }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0 0 44px;
+  }
+
+  /* SWATCHES */
+  .swatches {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+
+  .swatch-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .swatch {
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    border: 1px solid rgba(0,0,0,0.08);
+  }
+
+  .swatch-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--mid);
+    min-width: 80px;
+  }
+
+  .swatch-desc {
+    font-size: 0.875rem;
+    color: var(--mid);
+    font-weight: 300;
+  }
+
+  /* AD CARD */
+  .ad-card {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 32px;
+  }
+
+  .ad-card-header {
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .ad-card-header-left {}
+
+  .ad-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .ad-tag.mens  { color: var(--ipl-blue); }
+  .ad-tag.womens { color: #b02060; }
+
+  .ad-card-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--black);
+    line-height: 1.2;
+  }
+
+  .ad-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .ad-badge.explicit { background: #eaf0fa; color: var(--ipl-blue); }
+  .ad-badge.subtle   { background: #faf5ea; color: var(--ipl-gold); }
+  .ad-badge.pov      { background: #faecf2; color: #b02060; }
+
+  .ad-card-body { padding: 20px 24px; }
+
+  .ad-card-body p {
+    font-size: 0.9rem;
+    color: var(--mid);
+    margin-bottom: 16px;
+  }
+
+  .ad-card-body p:last-child { margin-bottom: 0; }
+
+  video {
+    width: 100%;
+    display: block;
+    border-radius: 4px;
+    background: #000;
+    margin-top: 16px;
+  }
+
+  /* SCRIPT BLOCK */
+  .script-block {
+    background: #f7f8fa;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 18px 20px;
+    margin-top: 16px;
+  }
+
+  .script-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--light);
+    margin-bottom: 12px;
+  }
+
+  .script-block p {
+    font-size: 0.875rem;
+    color: #444;
+    line-height: 1.7;
+    margin-bottom: 0;
+    font-style: italic;
+  }
+
+  /* ABOUT OVERLAY */
+  .about-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: #fff;
+    overflow-y: auto;
+  }
+
+  .about-overlay.open { display: block; }
+
+  .overlay-nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 201;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .overlay-nav-inner {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 0 32px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .overlay-nav-inner span {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--black);
+  }
+
+  .btn-close {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mid);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.15s;
+  }
+
+  .btn-close:hover { color: var(--ipl-blue); }
+
+  .about-inner {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 100px 32px 120px;
+  }
+
+  .about-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.6rem, 7vw, 4.2rem);
+    font-weight: 400;
+    line-height: 1.05;
+    color: var(--black);
+    margin-bottom: 40px;
+  }
+
+  .about-name span {
+    display: block;
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--mid);
+    margin-top: 8px;
+    line-height: 1.55;
+  }
+
+  .about-body {
+    border-top: 1px solid var(--border);
+    padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 520px;
+  }
+
+  .about-body p {
+    font-size: 1rem;
+    color: #333;
+    font-weight: 300;
+    line-height: 1.8;
+    margin-bottom: 0;
+  }
+
+  footer {
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  footer p {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: #bbb;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 520px) {
+    body { padding: 100px 20px 80px; }
+    .nav-inner, .overlay-nav-inner { padding: 0 20px; }
+    .ad-card-header { flex-direction: column; gap: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-name">Amandeep Kaur</a>
+    <ul class="nav-links">
+      <li><a href="#" onclick="openAbout(event)">About</a></li>
+      <li><a href="https://www.linkedin.com/in/amandeep-kaur-64a937295/" target="_blank" rel="noopener">LinkedIn</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header>
+  <p class="brand-tag">Portfolio — Case Study</p>
+  <h1>IPL Season<br>Ad Concepts</h1>
+  <p class="subtitle">Three ad concepts for a hair care brand timed around IPL season. Two for men's, one for women's. Same product brief, different angles, different appeals.</p>
+</header>
+
+<!-- OVERVIEW -->
+<section>
+  <h2>Project Overview</h2>
+  <p>IPL season is one of the most watched sporting events in India and one of the most contested advertising windows of the year. Every brand wants to be in the conversation. The brief here was sharper than that: find a way for a hair care brand to belong in that conversation without forcing the connection.</p>
+  <p>Both categories use a humorous, light-hearted register.</p>
+
+</section>
+
+<hr class="divider">
+
+<!-- MEN'S -->
+<section>
+  <h2>Men's Category</h2>
+  <p>Two variations on the same brief. The explicit version makes the product the subject from the start. The subtle version withholds it until the payoff, letting the situation do the work for longer. Both are for Brisa's silk-hair range.</p>
+
+  <!-- MEN'S V1: WITH SCRIPT -->
+  <div class="ad-card">
+    <div class="ad-card-header">
+      <div class="ad-card-header-left">
+        <p class="ad-tag mens">Men's — Variation 1</p>
+        <p class="ad-card-title">Brisa for Silk-Like Hair</p>
+      </div>
+      <span class="ad-badge explicit">Explicit</span>
+    </div>
+    <div class="ad-card-body">
+
+      <video controls>
+        <source src="Brisa for silk-like hair (1).mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+
+  <!-- MEN'S V2: WITHOUT SCRIPT -->
+  <div class="ad-card">
+    <div class="ad-card-header">
+      <div class="ad-card-header-left">
+        <p class="ad-tag mens">Men's — Variation 2</p>
+        <p class="ad-card-title">Brisa for Silk-Like Hair</p>
+      </div>
+      <span class="ad-badge subtle">Subtle</span>
+    </div>
+    <div class="ad-card-body">
+
+      <video controls>
+        <source src="Brisa for silk-like hair.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- WOMEN'S -->
+<section>
+  <h2>Women's Category</h2>
+  <p>A single concept built around a different mechanic: envy appeal routed through social media. The women's IPL category has a growing and genuinely engaged audience. The brief was to make an ad that felt native to that world: one that uses social media's grammar without borrowing its worst habits.</p>
+
+  <div class="ad-card">
+    <div class="ad-card-header">
+      <div class="ad-card-header-left">
+        <p class="ad-tag womens">Women's</p>
+        <p class="ad-card-title">Brisa — The Reel Edit</p>
+      </div>
+      <span class="ad-badge pov">POV</span>
+    </div>
+    <div class="ad-card-body">
+
+      <video controls>
+        <source src="BRISA.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>IPL Season Ad Concepts. Brisa is a hypothetical brand. All work shown is conceptual and created for portfolio purposes.</p>
+</footer>
+
+<!-- ABOUT OVERLAY -->
+<div class="about-overlay" id="about-overlay">
+  <div class="overlay-nav">
+    <div class="overlay-nav-inner">
+      <span>Amandeep Kaur</span>
+      <button class="btn-close" onclick="closeAbout()">Close</button>
+    </div>
+  </div>
+  <div class="about-inner">
+    <h1 class="about-name">
+      Amandeep<br>Kaur
+      <span>a builder of ideas at the intersection of<br>creativity, innovation, and impact.</span>
+    </h1>
+    <div class="about-body">
+      <p>I aim for creative direction roles. BBA graduate with a keen sociological eye by hobby. I like storytelling and developing ad campaigns with coherence across media.</p>
+      <p>I started my journey by founding my college's marketing team in collaboration with my faculty HOD, and by immersing myself in artbooks from Sony Animation Studios.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openAbout(e) {
+    e.preventDefault();
+    document.getElementById('about-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeAbout() {
+    document.getElementById('about-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeAbout();
+  });
+</script>
+
+</body>
+</html>
